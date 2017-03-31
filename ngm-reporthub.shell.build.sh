@@ -130,8 +130,13 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org
 
 #listen to
+# open
 sudo sed -i 's@bindIp: 127.0.0.1@#bindIp: 127.0.0.1@g' /etc/mongod.conf
 sudo service mongod restart
+# close
+sudo sed -i 's@#bindIp: 127.0.0.1@bindIp: 127.0.0.1@g' /etc/mongod.conf
+sudo service mongod restart
+
 
 
 
@@ -264,24 +269,22 @@ server {
 	root /home/ubuntu/nginx/www/ngm-reportHub/app/promo/;
 
 	location / {
-		try_files $uri $uri/ /index.html;
+		try_files \$uri \$uri/ /index.html;
 	}
 
 	location /desk {
 		alias /home/ubuntu/nginx/www/ngm-reportHub/app/;
-		try_files $uri $uri/ /index.html;
+		try_files \$uri \$uri/ /index.html;
 	}
 
 	location /desk/ {
 		alias /home/ubuntu/nginx/www/ngm-reportHub/app/;
-		try_files $uri $uri/ /index.html;
+		try_files \$uri \$uri/ /index.html;
 	}
 
 	location /desk/bower_components {
 		alias /home/ubuntu/nginx/www/ngm-reportHub/bower_components/;
-		try_files $uri $uri/ /index.html;
 	}
-
 	location /desk/bower_components/ {
 		alias /home/ubuntu/nginx/www/ngm-reportHub/bower_components/;
 	}
@@ -299,20 +302,21 @@ server {
 	}
 
 	location /api/ {
-		proxy_bind $server_addr;
+		proxy_bind \$server_addr;
 		proxy_pass http://127.0.0.1:1337/;
 		proxy_http_version 1.1;
-		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Upgrade \$http_upgrade;
 		proxy_set_header Connection 'upgrade';
-		proxy_set_header Host $host;
+		proxy_set_header Host \$host;
 		proxy_set_header Access-Control-Allow-Origin *;
-		proxy_cache_bypass $http_upgrade;
+		proxy_cache_bypass \$http_upgrade;
 	}
 
-}" | sudo tee /etc/nginx/sites-enabled/default
-# restart server
+}" | sudo tee /etc/nginx/sites-available/default
+# symb link
+# sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+# reload configuration
 sudo service nginx restart
-
 
 
 ###################################################### Postgresql Backup/Restore
@@ -322,8 +326,6 @@ sudo service nginx restart
 
 echo "------------ Restore Postgresql ------------"
 sudo gunzip -c /home/ubuntu/data/postgres/immap_afg.gz | psql -U ngmadmin -h localhost -d immap_afg
-
-
 
 
 
@@ -340,59 +342,7 @@ mongorestore -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
 # import collection
 # mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --file /home/ubuntu/data/csv/activities.csv
 # mongoimport -d ngmHealthCluster -c organizations --drop --headerline --type csv --file /home/ubuntu/data/csv/organizations.csv
+mongoimport -d ngmHealthCluster -c stockitems --drop --headerline --type csv --file /home/ubuntu/data/csv/stockitems.csv
 
 
 
-
-
-
-
-
-# mongoimport --jsonArray --db ngmReportHub --collection admin1 --file /home/ubuntu/data/json/admin1.json
-# mongoimport --jsonArray --db ngmReportHub --collection admin2 --file /home/ubuntu/data/json/admin2.json
-
-
-
-
-
-
-
-
-
-
-
-
-# # mongoexport --jsonArray --db ngmReportHub --collection user --out /home/ubuntu/nginx/www/data/json/user.json
-
-# # mongo import ngmReportHub
-# mongoimport --jsonArray --db ngmReportHub --collection user --file /home/ubuntu/nginx/www/data/json/user.json
-# mongoimport --jsonArray --db ngmReportHub --collection organization --file /home/ubuntu/nginx/www/data/json/organization.json
-
-# # drop
-# # mongo
-# # use ngmReportHub
-# # db.admin1.drop()
-# # db.admin2.drop()
-# # exit
-
-# # locations
-# mongoimport --jsonArray --db ngmReportHub --collection admin1 --file /home/ubuntu/nginx/www/data/json/admin1.json
-# mongoimport --jsonArray --db ngmReportHub --collection admin2 --file /home/ubuntu/nginx/www/data/json/admin2.json
-# # mongoimport --jsonArray --db ngmReportHub --collection province --file /home/ubuntu/nginx/www/data/json/province.json
-# # mongoimport --jsonArray --db ngmReportHub --collection district --file /home/ubuntu/nginx/www/data/json/district.json
-
-# # mongo import ngmHealthCluster
-# # mongoimport --jsonArray --db ngmHealthCluster --collection type --file /home/ubuntu/nginx/www/data/json/type.json
-# # mongoimport --jsonArray --db ngmHealthCluster --collection facility --file /home/ubuntu/nginx/www/data/json/facility.json
-
-# # mongorestore -d ngmHealthCluster -c targetlocation /home/ubuntu/nginx/www/data/
-
-
-
-# # Current startup (once initialised)
-# # mongoimport --jsonArray --db ngmReportHub --collection user --file /home/ubuntu/nginx/www/data/json/user.json
-# # mongoimport --jsonArray --db ngmReportHub --collection organization --file /home/ubuntu/nginx/www/data/json/organization.json
-
-# # startup
-# # cd /home/ubuntu/nginx/www/ngm-reportEngine/
-# # sudo sails lift
