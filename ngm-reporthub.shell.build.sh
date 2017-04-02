@@ -244,6 +244,7 @@ cd /home/ubuntu/nginx/www
 # ####################################################### Nginx
 # update nginx conf
 echo "------------ Configure Nginx ------------"
+cd /etc/nginx/sites-available/
 sudo sed -i "s/sendfile on;/sendfile off;/g" /etc/nginx/nginx.conf
 # update nginx web default conf
 echo -e "##
@@ -260,61 +261,61 @@ echo -e "##
 ##
 
 server {
-	sendfile off;
-	listen 80 default_server;
-	listen [::]:80 default_server ipv6only=on;
+\tsendfile off;
+\tlisten 80 default_server;
+\tlisten [::]:80 default_server ipv6only=on;
 
-	server_name vm.reporthub.immap.org;
+\tserver_name vm.reporthub.immap.org;
 
-	root /home/ubuntu/nginx/www/ngm-reportHub/app/promo/;
+\troot /home/ubuntu/nginx/www/ngm-reportHub/app/promo/;
 
-	location / {
-		try_files \$uri \$uri/ /index.html;
-	}
+\tlocation / {
+\t\ttry_files \$uri \$uri/ /index.html;
+\t}
 
-	location /desk {
-		alias /home/ubuntu/nginx/www/ngm-reportHub/app/;
-		try_files \$uri \$uri/ /index.html;
-	}
+\tlocation /desk {
+\t\talias /home/ubuntu/nginx/www/ngm-reportHub/app/;
+\t\ttry_files \$uri \$uri/ /index.html;
+\t}
 
-	location /desk/ {
-		alias /home/ubuntu/nginx/www/ngm-reportHub/app/;
-		try_files \$uri \$uri/ /index.html;
-	}
+\tlocation /desk/ {
+\t\talias /home/ubuntu/nginx/www/ngm-reportHub/app/;
+\t\ttry_files \$uri \$uri/ /index.html;
+\t}
 
-	location /desk/bower_components {
-		alias /home/ubuntu/nginx/www/ngm-reportHub/bower_components/;
-	}
-	location /desk/bower_components/ {
-		alias /home/ubuntu/nginx/www/ngm-reportHub/bower_components/;
-	}
+\tlocation /desk/bower_components {
+\t\talias /home/ubuntu/nginx/www/ngm-reportHub/bower_components/;
+\t}
+\tlocation /desk/bower_components/ {
+\t\talias /home/ubuntu/nginx/www/ngm-reportHub/bower_components/;
+\t}
 
-	location /scripts/ {
-		alias /home/ubuntu/nginx/www/ngm-reportHub/app/scripts/;
-	}
+\tlocation /scripts/ {
+\t\talias /home/ubuntu/nginx/www/ngm-reportHub/app/scripts/;
+\t\t}
 
-	location /views/ {
-		alias /home/ubuntu/nginx/www/ngm-reportHub/app/views/;
-	}
+\tlocation /views/ {
+\t\talias /home/ubuntu/nginx/www/ngm-reportHub/app/views/;
+\t}
 
-	location /report/ {
-		alias /home/ubuntu/nginx/www/ngm-reportPrint/pdf/; 
-	}
+\tlocation /report/ {
+\t\talias /home/ubuntu/nginx/www/ngm-reportPrint/pdf/; 
+\t}
 
-	location /api/ {
-		proxy_bind \$server_addr;
-		proxy_pass http://127.0.0.1:1337/;
-		proxy_http_version 1.1;
-		proxy_set_header Upgrade \$http_upgrade;
-		proxy_set_header Connection 'upgrade';
-		proxy_set_header Host \$host;
-		proxy_set_header Access-Control-Allow-Origin *;
-		proxy_cache_bypass \$http_upgrade;
-	}
+\tlocation /api/ {
+\t\tproxy_bind \$server_addr;
+\t\tproxy_pass http://127.0.0.1:1337/;
+\t\tproxy_http_version 1.1;
+\t\tproxy_set_header Upgrade \$http_upgrade;
+\t\tproxy_set_header Connection 'upgrade';
+\t\tproxy_set_header Host \$host;
+\t\tproxy_set_header Access-Control-Allow-Origin *;
+\t\tproxy_cache_bypass \$http_upgrade;
+\t\t}
 
 }" | sudo tee /etc/nginx/sites-available/default
 # symb link
-# sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 # reload configuration
 sudo service nginx restart
 
@@ -335,14 +336,15 @@ sudo gunzip -c /home/ubuntu/data/postgres/immap_afg.gz | psql -U ngmadmin -h loc
 
 
 # restore mongodb scripts
-mongorestore -d ngmReportHub /home/ubuntu/data/mongo/ngmReportHub
-mongorestore -d ngmHealthCluster /home/ubuntu/data/mongo/ngmHealthCluster
-mongorestore -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
+mongorestore --drop -d ngmReportHub /home/ubuntu/data/mongo/ngmReportHub
+mongorestore --drop -d ngmHealthCluster /home/ubuntu/data/mongo/ngmHealthCluster
+mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
 
 # import collection
-# mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --file /home/ubuntu/data/csv/activities.csv
-# mongoimport -d ngmHealthCluster -c organizations --drop --headerline --type csv --file /home/ubuntu/data/csv/organizations.csv
-mongoimport -d ngmHealthCluster -c stockitems --drop --headerline --type csv --file /home/ubuntu/data/csv/stockitems.csv
+mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --file /home/ubuntu/data/csv/activities.csv
+mongoimport -d ngmHealthCluster -c organizations --drop --headerline --type csv --file /home/ubuntu/data/csv/organizations.csv
+# mongoimport -d ngmHealthCluster -c stockitems --drop --headerline --type csv --file /home/ubuntu/data/csv/stockitems.csv
+sudo sails lift
 
 
 
