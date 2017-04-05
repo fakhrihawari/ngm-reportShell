@@ -342,8 +342,9 @@ mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
 
 # import collection
 mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --file /home/ubuntu/data/csv/activities.csv
+mongoimport -d ngmHealthCluster -c donors --drop --headerline --type csv --file /home/ubuntu/data/csv/donors.csv
 mongoimport -d ngmHealthCluster -c organizations --drop --headerline --type csv --file /home/ubuntu/data/csv/organizations.csv
-# mongoimport -d ngmHealthCluster -c stockitems --drop --headerline --type csv --file /home/ubuntu/data/csv/stockitems.csv
+mongoimport -d ngmHealthCluster -c stockitems --drop --headerline --type csv --file /home/ubuntu/data/csv/stockitems.csv
 sudo sails lift
 
 
