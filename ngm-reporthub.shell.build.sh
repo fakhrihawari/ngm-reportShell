@@ -38,6 +38,7 @@ sudo apt-get install -y gcc make build-essential checkinstall zip
 ####################################################### APT-GET INSTALLS
 # nodejs
 echo "------------ Get NodeJS 0.12 ------------" 
+# v0.12.15
 curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash
 echo "------------ Update repos ------------" 
 sudo apt-get update
@@ -129,16 +130,6 @@ echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" 
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 
-#listen to
-# open
-sudo sed -i 's@bindIp: 127.0.0.1@#bindIp: 127.0.0.1@g' /etc/mongod.conf
-sudo service mongod restart
-# close
-sudo sed -i 's@#bindIp: 127.0.0.1@bindIp: 127.0.0.1@g' /etc/mongod.conf
-sudo service mongod restart
-
-
-
 
 # ####################################################### ngm-ReportEngine
 echo "------------ Configure ngm-ReportEngine ------------"
@@ -195,31 +186,6 @@ module.exports = {
 		}
 	}
 }" | sudo tee /home/ubuntu/nginx/www/ngm-reportEngine/config/local.js
-
-############################ EMAIL CONF
-echo "------------ Configure email conf ------------"
-echo -e "/**
- * (sails.config.email)
- *
- *  For more information on this configuration file, see:
- *  https://github.com/balderdashy/sails-hook-email/#configuration
- *
- */
-module.exports.email = {
-
-  testMode: false,
-
-  service: 'Gmail',
-
-  from: 'pfitzgerald@immap.org',
-
-  auth: { user: 'ngmreporthub@gmail.com' , pass: 'ngmAdminP@1234' },
-
-  templateDir: 'views/email',
-
-  senderName: 'ReportHub'
-
-};" | sudo tee /home/ubuntu/nginx/www/ngm-reportEngine/config/email.js
 
 
 
@@ -328,17 +294,25 @@ sudo service nginx restart
 echo "------------ Restore Postgresql ------------"
 sudo gunzip -c /home/ubuntu/data/postgres/immap_afg.gz | psql -U ngmadmin -h localhost -d immap_afg
 
+#listen to
+# open
+sudo sed -i 's@bindIp: 127.0.0.1@#bindIp: 127.0.0.1@g' /etc/mongod.conf
+sudo service mongod restart
+# close
+sudo sed -i 's@#bindIp: 127.0.0.1@bindIp: 127.0.0.1@g' /etc/mongod.conf
+sudo service mongod restart
 
 
 ####################################################### MongoDB export
 # backup mongodb scripts
-# mongodump --out /home/ubuntu/data/mongo
+# mongodump --out /home/ubuntu/data/mongo/dump
 
 
 # restore mongodb scripts
 mongorestore --drop -d ngmReportHub /home/ubuntu/data/mongo/ngmReportHub
 mongorestore --drop -d ngmHealthCluster /home/ubuntu/data/mongo/ngmHealthCluster
 mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
+# sudo sails lift
 
 # import collection
 mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --file /home/ubuntu/data/csv/activities.csv
