@@ -35,6 +35,7 @@ echo "------------ Build essential ------------"
 sudo apt-get install -y gcc make build-essential checkinstall zip
 
 
+
 ####################################################### APT-GET INSTALLS
 # nodejs
 echo "------------ Get NodeJS 0.12 ------------" 
@@ -50,12 +51,14 @@ echo "------------ Install Git ------------"
 sudo apt-get install -y git
 
 
+
 ######################################################## NPM FIX PERMISSIONS
 echo "------------ Make npm directory ------------" 
 mkdir ~/.npm
 sudo chown -R $USER:$GROUP ~/.npm
 mkdir ~/.node-gyp
 sudo chown -R $USER:$GROUP ~/.node-gyp
+
 
 
 ######################################################## NPM INSTALLS
@@ -80,6 +83,7 @@ sudo npm install -g grunt@0.4.5
 sudo npm install -g grunt-cli@0.1.13
 
 
+
 ####################################################### Python 
 echo "------------ Install Python ------------"
 sudo apt-get install -y python2.7-dev
@@ -93,6 +97,7 @@ sudo pip install psycopg2
 sudo pip install xlrd
 
 
+
 ####################################################### Phantomjs
 echo "------------ Install PhantomJS ------------"
 sudo apt-get install -y build-essential g++ flex bison gperf ruby perl libsqlite3-dev libfontconfig1-dev libicu-dev libfreetype6 libssl-dev libpng-dev libjpeg-dev python libx11-dev libxext-dev
@@ -100,6 +105,7 @@ cd /usr/local/share/
 sudo git clone https://github.com/pfitzpaddy/ubuntu-lts-14.04-phantomjs2.git
 sudo cp /usr/local/share/ubuntu-lts-14.04-phantomjs2/phantomjs /usr/bin/phantomjs
 phantomjs -v
+
 
 
 # ####################################################### PostGIS
@@ -131,14 +137,41 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org
 
 
-# ####################################################### ngm-ReportEngine
-echo "------------ Configure ngm-ReportEngine ------------"
-# cd /home/ubuntu/nginx/www
-# sudo git clone https://github.com/pfitzpaddy/ngm-reportEngine.git
+
+####################################################### Applications folder
+sudo mkdir /home/ubuntu/nginx
+sudo mkdir /home/ubuntu/nginx/www
+sudo chown ubuntu /home/ubuntu/nginx/www -R
+
+
+
+####################################################### ngm-ReportPrint
+cd /home/ubuntu/nginx/www
+sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
+
+
+
+####################################################### ngm-ReportHub
+cd /home/ubuntu/nginx/www
+sudo git clone https://github.com/pfitzpaddy/ngm-reportHub.git
+# build Hub app
+cd /home/ubuntu/nginx/www/ngm-reportHub
+sudo npm install --allow-root
+# sudo bower ( lib dependices conflict )
+curl https://www.dropbox.com/s/5obb3lqo9el8my2/bower_components.zip?dl=0
+unzip bower_components.zip
+sudo gulp
+sudo chown ubuntu /home/ubuntu/nginx/www/ngm-reportHub -R
+
+
+
+####################################################### ngm-ReportEngine
+cd /home/ubuntu/nginx/www
+sudo git clone https://github.com/pfitzpaddy/ngm-reportEngine.git
 # build sails app
 cd /home/ubuntu/nginx/www/ngm-reportEngine
-# --no-bin-links for sym link
-npm install --no-bin-links
+sudo npm install --allow-root
+
 
 # connection config sails li
 echo -e "/**
@@ -186,24 +219,6 @@ module.exports = {
 		}
 	}
 }" | sudo tee /home/ubuntu/nginx/www/ngm-reportEngine/config/local.js
-
-
-
-####################################################### ngm-ReportHub
-echo "------------ Configure ngm-ReportHub ------------"
-# cd /home/ubuntu/nginx/www
-# sudo git clone https://github.com/pfitzpaddy/ngm-reportHub.git
-# build Hub app
-cd /home/ubuntu/nginx/www/ngm-reportHub
-# --no-bin-links for sym link
-npm install --no-bin-links
-bower install
-gulp
-
-
-####################################################### ngm-ReportPrint
-cd /home/ubuntu/nginx/www
-# sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
 
 
 
@@ -298,9 +313,6 @@ sudo gunzip -c /home/ubuntu/data/postgres/immap_afg.gz | psql -U ngmadmin -h loc
 # open
 sudo sed -i 's@bindIp: 127.0.0.1@#bindIp: 127.0.0.1@g' /etc/mongod.conf
 sudo service mongod restart
-# close
-sudo sed -i 's@#bindIp: 127.0.0.1@bindIp: 127.0.0.1@g' /etc/mongod.conf
-sudo service mongod restart
 
 
 ####################################################### MongoDB export
@@ -312,14 +324,36 @@ sudo service mongod restart
 mongorestore --drop -d ngmReportHub /home/ubuntu/data/mongo/ngmReportHub
 mongorestore --drop -d ngmHealthCluster /home/ubuntu/data/mongo/ngmHealthCluster
 mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
-# sudo sails lift
+mongorestore --drop -d Warning /home/ubuntu/data/mongo/Warning
 
-# import collection
+
+# import CSV collection
 mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --file /home/ubuntu/data/csv/activities.csv
 mongoimport -d ngmHealthCluster -c donors --drop --headerline --type csv --file /home/ubuntu/data/csv/donors.csv
 mongoimport -d ngmHealthCluster -c organizations --drop --headerline --type csv --file /home/ubuntu/data/csv/organizations.csv
 mongoimport -d ngmHealthCluster -c stockitems --drop --headerline --type csv --file /home/ubuntu/data/csv/stockitems.csv
-sudo sails lift
+
+
+
+
+######### EiEWG DB Processing
+# 1. unicef import / export
+mongoimport -d ngmReportHub -c eiewg_schools --drop --headerline --type csv --file /home/ubuntu/data/csv/eiewg_schools_unicef.csv
+# 2. run ngm/data/scripts/eiewg/reporthub.admin2schools.js
+# 3. export updated json
+mongoexport -d ngmReportHub -c admin2facilities -o /home/ubuntu/data/json/admin2facilities.json
+# 4. with filezilla copy json to DEV / PROD servers
+mongoimport -d ngmReportHub -c admin2facilities --drop --file /home/ubuntu/data/json/admin2facilities.json
+
+
+# ethiopian health facilities
+mongoimport -d ngmReportHub -c admin3facilities --drop --file /home/ubuntu/data/json/admin3facilities.json
+# export CSV
+mongoimport -d ngmHealthCluster -c reporthub_indicators_hct --drop --jsonArray --file /home/ubuntu/data/json/reporthub_indicators_hct.json
+mongoexport --db ngmHealthCluster --collection reporthub_indicators_hct --type=csv --fields id,title,districts,white_area_districts,idp_districts,wa_idp_districts,bphs_districts,bphs_services,hc_districts,hc_services,categories,bphs_data,hc_data --out /home/ubuntu/data/json/reporthub_indicators_hct.csv
+
+
+
 
 
 
