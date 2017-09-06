@@ -10,7 +10,6 @@
 - Dropbox 33.4.xx
 - Vagrant v1.9.xx
 - VirtualBox v5.1.xx
-- FileZilla 3.25.xx
 
 # Getting Started
 -
