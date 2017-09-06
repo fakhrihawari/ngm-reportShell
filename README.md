@@ -28,7 +28,6 @@ Steps
 	- ``ngm-reportEngine``
 	- ``ngm-reportHub``
 	- ``ngm-reportPrint``
-	- ``ngm-reportServer/keys``
 	- ``ngm-reportShell``
 6. Finally select ``Update`` and close
 	

@@ -324,7 +324,6 @@ sudo service mongod restart
 mongorestore --drop -d ngmReportHub /home/ubuntu/data/mongo/ngmReportHub
 mongorestore --drop -d ngmHealthCluster /home/ubuntu/data/mongo/ngmHealthCluster
 mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
-mongorestore --drop -d Warning /home/ubuntu/data/mongo/Warning
 
 
 # import CSV collection
@@ -343,6 +342,7 @@ mongoimport -d ngmReportHub -c eiewg_schools --drop --headerline --type csv --fi
 # 3. export updated json
 mongoexport -d ngmReportHub -c admin2facilities -o /home/ubuntu/data/json/admin2facilities.json
 # 4. with filezilla copy json to DEV / PROD servers
+# 5. import to with filezilla copy json to DEV / PROD servers
 mongoimport -d ngmReportHub -c admin2facilities --drop --file /home/ubuntu/data/json/admin2facilities.json
 
 
