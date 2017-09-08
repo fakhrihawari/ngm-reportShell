@@ -1,5 +1,4 @@
 # [ReportHub](http://reporthub.immap.org)
--
 > 
 > Reporting Workflow. Decision Support. Real-Time.
 > 
@@ -13,7 +12,7 @@
 
 # Getting Started
 
-The first steps will be to establish a local development environment on your machine.
+The first steps will be to establish a local development environment on your machine and establish connection with the DEV server.
 
 Steps
 

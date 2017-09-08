@@ -37,27 +37,38 @@ sudo apt-get install -y gcc make build-essential checkinstall zip
 
 
 ####################################################### APT-GET INSTALLS
-# nodejs
-echo "------------ Get NodeJS 0.12 ------------" 
-# v0.12.15
-curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash
-echo "------------ Update repos ------------" 
-sudo apt-get update
-echo "------------ Install NodeJS ------------" 
-sudo apt-get install -y nodejs
-echo "------------ Install Nginx ------------" 
+# nginx
 sudo apt-get install -y nginx
-echo "------------ Install Git ------------" 
+# git
 sudo apt-get install -y git
+# node
+curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+sudo apt-get install -y nodejs
 
+####################################################### NPM INSTALLS
+# npm
+sudo npm install -g npm@3.4.0 --allow-root
+# pm2
+sudo npm install -g pm2@0.15.10 --allow-root
+# gulp
+sudo npm install -g gulp@3.9.1 --allow-root
+gulp -v
+# sailsjs
+sudo npm install -g sails@0.11.2 --allow-root
+sudo npm install -g sails-postgresql --allow-root
+# bower
+sudo npm install -g bower@1.6.5 --allow-root
+# grunt
+sudo npm install -g grunt@0.4.x --allow-root
+sudo npm install -g grunt-cli@0.1.13 --allow-root
 
 
 ######################################################## NPM FIX PERMISSIONS
-echo "------------ Make npm directory ------------" 
-mkdir ~/.npm
-sudo chown -R $USER:$GROUP ~/.npm
-mkdir ~/.node-gyp
-sudo chown -R $USER:$GROUP ~/.node-gyp
+# echo "------------ Make npm directory ------------" 
+# mkdir ~/.npm
+# sudo chown -R $USER:$GROUP ~/.npm
+# mkdir ~/.node-gyp
+# sudo chown -R $USER:$GROUP ~/.node-gyp
 
 
 
@@ -82,6 +93,11 @@ echo "------------ npm grunt ------------"
 sudo npm install -g grunt@0.4.5
 sudo npm install -g grunt-cli@0.1.13
 
+
+####################################################### UPDATE NODE
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
 
 
 ####################################################### Python 
