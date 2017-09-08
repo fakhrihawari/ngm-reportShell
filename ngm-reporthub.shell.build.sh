@@ -333,24 +333,11 @@ mongoimport -d ngmHealthCluster -c organizations --drop --headerline --type csv 
 mongoimport -d ngmHealthCluster -c stockitems --drop --headerline --type csv --file /home/ubuntu/data/csv/stockitems.csv
 
 
-
-
-######### EiEWG DB Processing
-# 1. unicef import / export
-mongoimport -d ngmReportHub -c eiewg_schools --drop --headerline --type csv --file /home/ubuntu/data/csv/eiewg_schools_unicef.csv
-# 2. run ngm/data/scripts/eiewg/reporthub.admin2schools.js
-# 3. export updated json
-mongoexport -d ngmReportHub -c admin2facilities -o /home/ubuntu/data/json/admin2facilities.json
-# 4. with filezilla copy json to DEV / PROD servers
-# 5. import to with filezilla copy json to DEV / PROD servers
-mongoimport -d ngmReportHub -c admin2facilities --drop --file /home/ubuntu/data/json/admin2facilities.json
-
-
-# ethiopian health facilities
-mongoimport -d ngmReportHub -c admin3facilities --drop --file /home/ubuntu/data/json/admin3facilities.json
-# export CSV
-mongoimport -d ngmHealthCluster -c reporthub_indicators_hct --drop --jsonArray --file /home/ubuntu/data/json/reporthub_indicators_hct.json
-mongoexport --db ngmHealthCluster --collection reporthub_indicators_hct --type=csv --fields id,title,districts,white_area_districts,idp_districts,wa_idp_districts,bphs_districts,bphs_services,hc_districts,hc_services,categories,bphs_data,hc_data --out /home/ubuntu/data/json/reporthub_indicators_hct.csv
+# # ethiopian health facilities
+# mongoimport -d ngmReportHub -c admin3facilities --drop --file /home/ubuntu/data/json/admin3facilities.json
+# # export CSV
+# mongoimport -d ngmHealthCluster -c reporthub_indicators_hct --drop --jsonArray --file /home/ubuntu/data/json/reporthub_indicators_hct.json
+# mongoexport --db ngmHealthCluster --collection reporthub_indicators_hct --type=csv --fields id,title,districts,white_area_districts,idp_districts,wa_idp_districts,bphs_districts,bphs_services,hc_districts,hc_services,categories,bphs_data,hc_data --out /home/ubuntu/data/json/reporthub_indicators_hct.csv
 
 
 

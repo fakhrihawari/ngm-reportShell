@@ -13,7 +13,7 @@
 
 # Getting Started
 
-The first steps will be to establish a local development environment on your machine and establish connection with the DEV server.
+The first steps will be to establish a local development environment on your machine.
 
 Steps
 
