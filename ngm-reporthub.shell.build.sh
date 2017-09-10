@@ -138,6 +138,9 @@ echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" 
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 
+# LISTEN TO
+sudo sed -i 's@bindIp: 127.0.0.1@#bindIp: 127.0.0.1@g' /etc/mongod.conf
+sudo service mongod restart
 
 
 ####################################################### Applications folder
@@ -173,7 +176,10 @@ cd /home/ubuntu/nginx/www
 sudo git clone https://github.com/pfitzpaddy/ngm-reportEngine.git
 # build sails app
 cd /home/ubuntu/nginx/www/ngm-reportEngine
-sudo npm install --allow-root
+# sudo bower ( lib dependices conflict )
+wget https://www.dropbox.com/s/ie8l41wgvwe0xke/node_modules.zip?dl=1
+unzip node_modules.zip?dl=1
+sudo rm node_modules.zip\?dl\=1
 
 
 # connection config sails li
@@ -311,11 +317,6 @@ sudo service nginx restart
 
 echo "------------ Restore Postgresql ------------"
 sudo gunzip -c /home/ubuntu/data/postgres/immap_afg.gz | psql -U ngmadmin -h localhost -d immap_afg
-
-#listen to
-# open
-sudo sed -i 's@bindIp: 127.0.0.1@#bindIp: 127.0.0.1@g' /etc/mongod.conf
-sudo service mongod restart
 
 
 ####################################################### MongoDB export
