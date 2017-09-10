@@ -51,7 +51,9 @@ echo "------------ Install Git ------------"
 sudo apt-get install -y git
 
 
-# NOT REQUIRED
+# NOT REQUIRED.
+
+# New update?
 
 ####################################################### UPDATE NODE
 # sudo npm cache clean -f
