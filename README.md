@@ -1,5 +1,4 @@
 # [ReportHub](http://reporthub.immap.org)
--
 > 
 > Reporting Workflow. Decision Support. Real-Time.
 > 
@@ -12,9 +11,8 @@
 - VirtualBox v5.1.xx
 
 # Getting Started
--
 
-The first steps will be to establish a local development environment on your machine.
+The first steps will be to establish a local development environment on your machine and establish connection with the DEV server.
 
 Steps
 
@@ -34,7 +32,7 @@ Steps
 	> NOTE: in Dropbox select ```Pause Syncing``` in low bandwidth environments.
 
 # Vagrant Local Server
--
+
 With Dropbox folders unselected for sync, run the following commands to setup the local development environment.
 
 Steps
@@ -63,7 +61,7 @@ Steps
 
 
 # Running ReportHub
--
+
 Once the VirtualBox is completed installation, you can access the configured ReportHub Ubuntu LTS 14.0.4 Virtual Machine via the ``vagrant ssh`` command
 
 Steps
