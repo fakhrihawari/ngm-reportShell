@@ -41,8 +41,6 @@ sudo apt-get install -y gcc make build-essential checkinstall zip
 echo "------------ Get NodeJS 0.12 ------------" 
 # v0.12.15
 curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash
-echo "------------ Update repos ------------" 
-sudo apt-get update
 echo "------------ Install NodeJS ------------" 
 sudo apt-get install -y nodejs
 echo "------------ Install Nginx ------------" 
@@ -50,10 +48,6 @@ sudo apt-get install -y nginx
 echo "------------ Install Git ------------" 
 sudo apt-get install -y git
 
-
-# NOT REQUIRED.
-
-# New update?
 
 ####################################################### UPDATE NODE
 # sudo npm cache clean -f
