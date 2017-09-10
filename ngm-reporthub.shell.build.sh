@@ -158,8 +158,9 @@ sudo git clone https://github.com/pfitzpaddy/ngm-reportHub.git
 cd /home/ubuntu/nginx/www/ngm-reportHub
 sudo npm install --allow-root
 # sudo bower ( lib dependices conflict )
-curl https://www.dropbox.com/s/5obb3lqo9el8my2/bower_components.zip?dl=0
-unzip bower_components.zip
+wget https://www.dropbox.com/s/5obb3lqo9el8my2/bower_components.zip?dl=1
+unzip bower_components.zip?dl=1
+sudo rm bower_components.zip\?dl\=1
 sudo gulp
 sudo chown ubuntu /home/ubuntu/nginx/www/ngm-reportHub -R
 
