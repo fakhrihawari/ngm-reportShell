@@ -74,7 +74,7 @@ echo "------------ npm install pm2 ------------"
 sudo npm install -g pm2@0.15.10
 pm2 -v
 echo "------------ npm install sails + postgresql ------------"
-sudo npm install -g sails@0.11.2
+sudo npm install -g --unsafe-perm sails@0.11.2
 sudo npm install -g sails-postgresql@0.11.2
 sails -v
 echo "------------ npm install bower ------------" 
@@ -167,7 +167,6 @@ wget https://www.dropbox.com/s/5obb3lqo9el8my2/bower_components.zip?dl=1
 unzip bower_components.zip?dl=1
 sudo rm bower_components.zip\?dl\=1
 sudo gulp
-sudo chown ubuntu /home/ubuntu/nginx/www/ngm-reportHub -R
 
 
 
@@ -330,12 +329,11 @@ mongorestore --drop -d ngmHealthCluster /home/ubuntu/data/mongo/ngmHealthCluster
 mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
 
 
-# import CSV collection
+# import collection
 mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --file /home/ubuntu/data/csv/activities.csv
 mongoimport -d ngmHealthCluster -c donors --drop --headerline --type csv --file /home/ubuntu/data/csv/donors.csv
-mongoimport -d ngmHealthCluster -c organizations --drop --headerline --type csv --file /home/ubuntu/data/csv/organizations.csv
 mongoimport -d ngmHealthCluster -c stockitems --drop --headerline --type csv --file /home/ubuntu/data/csv/stockitems.csv
-
+mongoimport -d ngmReportHub -c organizations --drop --headerline --type csv --file /home/ubuntu/data/csv/organizations.csv
 
 # # ethiopian health facilities
 # mongoimport -d ngmReportHub -c admin3facilities --drop --file /home/ubuntu/data/json/admin3facilities.json
