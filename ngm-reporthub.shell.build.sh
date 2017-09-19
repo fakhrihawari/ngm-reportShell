@@ -158,7 +158,10 @@ sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
 
 ####################################################### ngm-ReportHub
 cd /home/ubuntu/nginx/www
-sudo git clone https://github.com/pfitzpaddy/ngm-reportHub.git
+
+# UPDATE TO YOUR FORKED REPO!
+sudo git clone https://github.com/<your.fork>/ngm-reportHub.git
+
 # build Hub app
 cd /home/ubuntu/nginx/www/ngm-reportHub
 sudo npm install --allow-root
@@ -172,7 +175,10 @@ sudo gulp
 
 ####################################################### ngm-ReportEngine
 cd /home/ubuntu/nginx/www
-sudo git clone https://github.com/pfitzpaddy/ngm-reportEngine.git
+
+# UPDATE TO YOUR FORKED REPO!
+sudo git clone https://github.com/<your.fork>/ngm-reportEngine.git
+
 # build sails app
 cd /home/ubuntu/nginx/www/ngm-reportEngine
 # sudo bower ( lib dependices conflict )
