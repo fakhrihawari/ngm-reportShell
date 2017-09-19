@@ -30,6 +30,16 @@ Steps
 6. Finally select ``Update`` and close
 	
 	> NOTE: in Dropbox select ```Pause Syncing``` in low bandwidth environments.
+	
+# Contributing Code
+
+Please review the following links in order to understand how to contribute code to ReportHub repositories
+
+### GitHub Fork & Pull Approach
+
+- [Fork & Pull Approach](https://gist.github.com/Chaser324/ce0505fbed06b947d962)
+- [Github Flow](https://guides.github.com/introduction/flow/)
+
 
 # Vagrant Local Server
 
@@ -47,9 +57,15 @@ Steps
 		
 3. cd into ``ngm-reportShell``
 
-		$ cd ngm-reportShell
 
-4. Run [Vagrant Up](https://www.vagrantup.com/docs/cli/up.html) command
+		$ cd ngm-reportShell
+		
+4. Update the GitHub repository locations to your forked version of the code
+
+		# UPDATE TO YOUR FORKED REPO!
+		sudo git clone https://github.com/<your.fork>/ngm-reportHub.git
+
+5. Run [Vagrant Up](https://www.vagrantup.com/docs/cli/up.html) command
 
 		$ vagrant up
 		
