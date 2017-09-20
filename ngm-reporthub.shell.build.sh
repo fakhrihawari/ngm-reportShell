@@ -160,6 +160,7 @@ sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
 cd /home/ubuntu/nginx/www
 
 # UPDATE TO YOUR FORKED REPO!
+# https://help.github.com/articles/changing-a-remote-s-url/
 sudo git clone https://github.com/<your.fork>/ngm-reportHub.git
 
 # build Hub app
@@ -177,6 +178,7 @@ sudo gulp
 cd /home/ubuntu/nginx/www
 
 # UPDATE TO YOUR FORKED REPO!
+# https://help.github.com/articles/changing-a-remote-s-url/
 sudo git clone https://github.com/<your.fork>/ngm-reportEngine.git
 
 # build sails app
