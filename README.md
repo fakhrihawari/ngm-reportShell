@@ -21,7 +21,7 @@ Steps
 3. Add to your Dropbox the ``iMMAP AF Team Folder`` [here](https://www.dropbox.com/sh/5eti378yx2qxbxq/AAAFjJkGznjwk8IkZmRkRc7Ma?dl=0)
 4. On your local machine, select ``Dropbox 'Settings' > 'Preferences...'``
 5. Select ``Account`` tab followed by ```Change Settings...```
-6. Navigate to ```iMMAP AF Team Folder/@ReportHub/ngm```
+6. Navigate to ```iMMAP AF Team Folder/ReportHub/ngm```
 5. Unselect the following folders;
 	- ``ngm-reportEngine``
 	- ``ngm-reportHub``
@@ -47,9 +47,9 @@ With Dropbox folders unselected for sync, run the following commands to setup th
 
 Steps
   
-1. on the cmd line, navigate to ``@ReportHub/ngm`` folder in Dropbox
+1. on the cmd line, navigate to ``ReportHub/ngm`` folder in Dropbox
 
-		$ cd ~/Dropbox\ \(iMMAP\ AF\)/iMMAP\ AF\ Team\ Folder/\@ReportHub/ngm
+		$ cd ~/Dropbox/ReportHub/ngm
 		
 2. in ``@ReportHub/ngm`` folder fetch ``ngm-reportShell`` repo 
 
