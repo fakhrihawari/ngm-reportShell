@@ -49,7 +49,7 @@ Steps
   
 1. on the cmd line, navigate to ``ReportHub/ngm`` folder in Dropbox
 
-		$ cd ~/Dropbox/ReportHub/ngm
+		$ cd ~/Dropbox/iMMAP AF Team Folder/ReportHub/ngm/ReportHub/ngm
 		
 2. in ``@ReportHub/ngm`` folder fetch ``ngm-reportShell`` repo 
 
