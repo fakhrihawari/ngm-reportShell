@@ -151,42 +151,42 @@ sudo chown ubuntu /home/ubuntu/nginx/www -R
 
 
 ####################################################### ngm-ReportPrint
-# cd /home/ubuntu/nginx/www
-# sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
+cd /home/ubuntu/nginx/www
+sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
 
 
 
 ####################################################### ngm-ReportHub
-# cd /home/ubuntu/nginx/www
+cd /home/ubuntu/nginx/www
 
 # UPDATE TO YOUR FORKED REPO!
 # https://help.github.com/articles/changing-a-remote-s-url/
-# sudo git clone https://github.com/<your.fork>/ngm-reportHub.git
+sudo git clone https://github.com/<your.fork>/ngm-reportHub.git
 
 # build Hub app
-# cd /home/ubuntu/nginx/www/ngm-reportHub
-# sudo npm install --allow-root
-# # sudo bower ( lib dependices conflict )
-# wget https://www.dropbox.com/s/5obb3lqo9el8my2/bower_components.zip?dl=1
-# unzip bower_components.zip?dl=1
-# sudo rm bower_components.zip\?dl\=1
-# sudo gulp
+cd /home/ubuntu/nginx/www/ngm-reportHub
+sudo npm install --allow-root
+# sudo bower ( lib dependices conflict )
+wget https://www.dropbox.com/s/5obb3lqo9el8my2/bower_components.zip?dl=1
+unzip bower_components.zip?dl=1
+sudo rm bower_components.zip\?dl\=1
+sudo gulp
 
 
 
 ####################################################### ngm-ReportEngine
-# cd /home/ubuntu/nginx/www
+cd /home/ubuntu/nginx/www
 
-# # UPDATE TO YOUR FORKED REPO!
-# # https://help.github.com/articles/changing-a-remote-s-url/
-# sudo git clone https://github.com/<your.fork>/ngm-reportEngine.git
+# UPDATE TO YOUR FORKED REPO!
+# https://help.github.com/articles/changing-a-remote-s-url/
+sudo git clone https://github.com/<your.fork>/ngm-reportEngine.git
 
-# # build sails app
-# cd /home/ubuntu/nginx/www/ngm-reportEngine
-# # sudo bower ( lib dependices conflict )
-# wget https://www.dropbox.com/s/ie8l41wgvwe0xke/node_modules.zip?dl=1
-# unzip node_modules.zip?dl=1
-# sudo rm node_modules.zip\?dl\=1
+# build sails app
+cd /home/ubuntu/nginx/www/ngm-reportEngine
+# sudo bower ( lib dependices conflict )
+wget https://www.dropbox.com/s/ie8l41wgvwe0xke/node_modules.zip?dl=1
+unzip node_modules.zip?dl=1
+sudo rm node_modules.zip\?dl\=1
 
 
 # connection config sails li
