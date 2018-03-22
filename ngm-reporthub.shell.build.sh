@@ -19,12 +19,6 @@
 # # Notes: 
 # #  - To create ppk:$ puttygen ngm.pem -o ngm.ppk -O private
 # #
-# # Steps: 
-# #		1) Launch AWS Instance
-# #		2) Copy Postgresql immap_afg.gz to /home/ubuntu/data
-# #		3) Copy MongoDB lists to /home/ubuntu/data
-# #		4) Run this script!
-# #
 # #######################################################
 
 # refresh cache
