@@ -249,6 +249,15 @@ module.exports = {
 			database: 'ngmEthCtc',
 			schema: false
 		},
+		ngmAfNutritionServer: {
+			adapter: 'sails-mongo',
+			host: 'localhost',
+			port: 27017,
+			// user: 'username',
+			// password: 'password',
+			database: 'ngmAfNutrition',
+			schema: false
+		},
 		ngmPostgreServer: {
 			adapter: 'sails-postgresql',
 			host: 'localhost',
