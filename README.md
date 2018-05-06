@@ -17,9 +17,10 @@
 		``Settings -> Update & Security -> Recovery -> Advanced startup -> Restart Now -> Troubleshoot -> Advanced Options -> UEFI Firmware Settings`` and change ``Intel VT`` to ``enable``.
 
 ### Contributing Code
-Review links on how to contribute code to ReportHub repositories
-- [Fork & Pull Approach](https://gist.github.com/Chaser324/ce0505fbed06b947d962)
-- [Github Flow](https://guides.github.com/introduction/flow/)
+- Review links on how to contribute code to ReportHub repositories
+	-- [Fork & Pull Approach](https://gist.github.com/Chaser324/ce0505fbed06b947d962)
+	-- [Github Flow](https://guides.github.com/introduction/flow/)
+
 
 
 ## Getting Started
@@ -52,6 +53,8 @@ ngm
 |-- scripts
 ```
 
+
+
 ## Vagrant Local Server
 - Run the following commands to setup the local development environment.
 
@@ -77,6 +80,7 @@ ngm
 	- ``ngm-reportShell/ngm-reporthub.shell.build.sh``
 
 
+
 ## Running ReportHub
 - Once the VirtualBox is completed installation, you can access the configured ReportHub Ubuntu LTS 14.0.4 Virtual Machine via the ``vagrant ssh`` command
 
@@ -97,8 +101,10 @@ ngm
 4. Navigate to [http://192.168.33.16](http://192.168.33.16) and ReportHub is running!
 
 
+
 ## Admin Boundaries Import
 - Navigate to ``ngm/scripts/admin`` to review import script for Admin levels to the standardized ReportHub db structure
+
 
 
 ## ReportHub Modules
