@@ -22,7 +22,7 @@
 ### Steps
 
 1. Install Software Requirements listed above on your local machine
-2. Unzip [ngm folder]() to local machine and unzip
+2. Unzip [ngm folder](https://www.dropbox.com/s/fg4nqibkiqbr80x/ngm.zip?dl=1) to local machine and unzip
 	
 ### Contributing Code
 - Please review the following links in order to understand how to contribute code to ReportHub repositories
