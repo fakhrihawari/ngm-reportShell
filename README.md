@@ -16,22 +16,39 @@
 - After installing, update the BIOS setting to enable VT-x. On Windows 10, go to 
 		``Settings -> Update & Security -> Recovery -> Advanced startup -> Restart Now -> Troubleshoot -> Advanced Options -> UEFI Firmware Settings`` and change ``Intel VT`` to ``enable``.
 
+### Contributing Code
+Review links on how to contribute code to ReportHub repositories
+- [Fork & Pull Approach](https://gist.github.com/Chaser324/ce0505fbed06b947d962)
+- [Github Flow](https://guides.github.com/introduction/flow/)
+
+
 # Getting Started
-- The first steps will be to establish a local development environment on your machine and establish connection with the DEV server.
+- The first steps will be to establish a local development environment on your local machine.
 
 ### Steps
 
 1. Install Software Requirements listed above on your local machine
-2. Unzip [ngm folder](https://www.dropbox.com/s/fg4nqibkiqbr80x/ngm.zip?dl=1) to local machine and unzip
+2. Create ngm folder on your local machine in your development folder
+
+		$ i.e. mkdir ~/Users/fitzpaddy/Sites/ngm
+
+3. Clone ``ngm-reportShell`` repository in ``ngm`` folder
+
+		$ cd ~/Users/fitzpaddy/Sites/ngm
+		$ sudo git clone https://github.com/pfitzpaddy/ngm-reportShell.git
+
+4. Copy contents of [ngm folder](https://www.dropbox.com/s/fg4nqibkiqbr80x/ngm.zip?dl=1) and place in ``ngm`` folder
+
+### Result
+- The ``ngm`` folder will now contain the following structure
+|-- ngm
+|---- csv
+|---- data
+|---- kobo
+|---- ngm-reportShell
+|---- mongo
+|---- scripts
 	
-### Contributing Code
-- Please review the following links in order to understand how to contribute code to ReportHub repositories
-
-### GitHub Fork & Pull Approach
-
-- [Fork & Pull Approach](https://gist.github.com/Chaser324/ce0505fbed06b947d962)
-- [Github Flow](https://guides.github.com/introduction/flow/)
-
 
 # Vagrant Local Server
 - Run the following commands to setup the local development environment.
