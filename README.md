@@ -17,17 +17,15 @@
 		``Settings -> Update & Security -> Recovery -> Advanced startup -> Restart Now -> Troubleshoot -> Advanced Options -> UEFI Firmware Settings`` and change ``Intel VT`` to ``enable``.
 
 # Getting Started
+- The first steps will be to establish a local development environment on your machine and establish connection with the DEV server.
 
-The first steps will be to establish a local development environment on your machine and establish connection with the DEV server.
-
-Steps
+### Steps
 
 1. Install Software Requirements listed above on your local machine
-2. Unzip ngm folder to local machine and unzip
+2. Unzip [ngm folder]() to local machine and unzip
 	
-# Contributing Code
-
-Please review the following links in order to understand how to contribute code to ReportHub repositories
+### Contributing Code
+- Please review the following links in order to understand how to contribute code to ReportHub repositories
 
 ### GitHub Fork & Pull Approach
 
@@ -36,10 +34,9 @@ Please review the following links in order to understand how to contribute code 
 
 
 # Vagrant Local Server
+- Run the following commands to setup the local development environment.
 
-With Dropbox folders unselected for sync, run the following commands to setup the local development environment.
-
-Steps
+### Steps
   
 1. on the cmd line, navigate to ``ngm/ngm-reportShell`` folder
 
@@ -62,10 +59,9 @@ Steps
 
 
 # Running ReportHub
+- Once the VirtualBox is completed installation, you can access the configured ReportHub Ubuntu LTS 14.0.4 Virtual Machine via the ``vagrant ssh`` command
 
-Once the VirtualBox is completed installation, you can access the configured ReportHub Ubuntu LTS 14.0.4 Virtual Machine via the ``vagrant ssh`` command
-
-Steps
+### Steps
 
 1. Within the ``ngm-reportShell`` folder, ssh into machine
 
