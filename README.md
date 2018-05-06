@@ -37,6 +37,8 @@
 
 		$ cd ~/Users/fitzpaddy/Sites/ngm
 		$ sudo git clone https://github.com/pfitzpaddy/ngm-reportShell.git
+		$ # cd into ngm-reportShell & check out localhost-reporthub
+		$ cd ngm-reportShell && git checkout localhost-reporthub
 
 4. Copy contents of [ngm folder](https://www.dropbox.com/s/fg4nqibkiqbr80x/ngm.zip?dl=1) and place in ``ngm`` folder
 
