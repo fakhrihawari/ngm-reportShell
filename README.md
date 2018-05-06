@@ -1,7 +1,7 @@
 # [ReportHub](http://reporthub.immap.org)
-> 
+>
 > Reporting Workflow. Decision Support. Real-Time.
-> 
+>
 > Developer documentation for local project setup
 
 ### Requirements
@@ -13,7 +13,7 @@
 ### Notes
 - $ git clone requires GIT CMD
 - CMD needs to be run as administrator.
-- After installing, update the BIOS setting to enable VT-x. On Windows 10, go to 
+- After installing, update the BIOS setting to enable VT-x. On Windows 10, go to
 		``Settings -> Update & Security -> Recovery -> Advanced startup -> Restart Now -> Troubleshoot -> Advanced Options -> UEFI Firmware Settings`` and change ``Intel VT`` to ``enable``.
 
 ### Contributing Code
@@ -22,7 +22,7 @@ Review links on how to contribute code to ReportHub repositories
 - [Github Flow](https://guides.github.com/introduction/flow/)
 
 
-# Getting Started
+## Getting Started
 - The first steps will be to establish a local development environment on your local machine.
 
 ### Steps
@@ -41,24 +41,26 @@ Review links on how to contribute code to ReportHub repositories
 
 ### Result
 - The ``ngm`` folder will now contain the following structure
-├── ngm
-│   ├── css
-│   ├── data
-│   ├── kobo
-│   ├── ngm-reportShell
-│   ├── mongo
-│   ├── scripts
-	
 
-# Vagrant Local Server
+```bash
+ngm
+|-- css
+|-- data
+|-- kobo
+|-- ngm-reportShell
+|-- mongo
+|-- scripts
+```
+
+## Vagrant Local Server
 - Run the following commands to setup the local development environment.
 
 ### Steps
-  
+
 1. on the cmd line, navigate to ``ngm/ngm-reportShell`` folder
 
 		$ i.e. cd ~/Users/fitzpaddy/Sites/ngm/ngm-reportShell
-		
+
 3. Update the GitHub repository locations to your forked version of the code
 
 		# UPDATE TO YOUR FORKED REPO! (lines 146 & 168)
@@ -67,15 +69,15 @@ Review links on how to contribute code to ReportHub repositories
 5. Run [Vagrant Up](https://www.vagrantup.com/docs/cli/up.html) command
 
 		$ vagrant up
-		
+
 	> NOTE: This will take some time to fetch the Ubuntu Lts 14.04 VirtualBox image as well as install server software to establish a replica local server environemnt
 
-5. During install, review VirtualBox configurations in 
+5. During install, review VirtualBox configurations in
 	- ``ngm-reportShell/Vagrantfile``
 	- ``ngm-reportShell/ngm-reporthub.shell.build.sh``
 
 
-# Running ReportHub
+## Running ReportHub
 - Once the VirtualBox is completed installation, you can access the configured ReportHub Ubuntu LTS 14.0.4 Virtual Machine via the ``vagrant ssh`` command
 
 ### Steps
@@ -83,11 +85,11 @@ Review links on how to contribute code to ReportHub repositories
 1. Within the ``ngm-reportShell`` folder, ssh into machine
 
 		$ vagrant ssh
-		
+
 2. Within the server, navigate to the ``ngm-reportEngine`` repository
 
 		$ cd /home/ubuntu/nginx/www/ngm-reportEngine
-		
+
 3. Start the Sails RestAPI application
 
 		$ sudo sails lift
@@ -95,9 +97,9 @@ Review links on how to contribute code to ReportHub repositories
 4. Navigate to [http://192.168.33.16](http://192.168.33.16) and ReportHub is running!
 
 
-# Admin Import
+## Admin Boundaries Import
 - Navigate to ``ngm/scripts/admin`` to review import script for Admin levels to the standardized ReportHub db structure
 
 
-# ReportHub Modules
+## ReportHub Modules
 - Navigate to ``ngm/ngm-reportHub/README.md`` to review implementing ReportHub modules
