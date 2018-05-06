@@ -365,6 +365,7 @@ sudo gunzip -c /home/ubuntu/data/postgres/immap_afg.gz | psql -U ngmadmin -h loc
 
 
 # restore mongodb scripts
+mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmAfNutrition
 mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
 mongorestore --drop -d ngmReportHub /home/ubuntu/data/mongo/ngmReportHub
 mongorestore --drop -d ngmHealthCluster /home/ubuntu/data/mongo/ngmHealthCluster
