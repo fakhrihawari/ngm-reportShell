@@ -60,16 +60,21 @@ ngm
 
 ### Steps
 
-1. on the cmd line, navigate to ``ngm/ngm-reportShell`` folder
+1. On [GitHub](https://github.com/), fork the following repositories to your account
+
+		$ [ngm-reportHub](https://github.com/pfitzpaddy/ngm-reportHub)
+		$ [ngm-reportEngine](https://github.com/pfitzpaddy/ngm-reportEngine)
+
+2. On your local cmd line, navigate to ``ngm/ngm-reportShell`` folder
 
 		$ i.e. cd ~/Users/fitzpaddy/Sites/ngm/ngm-reportShell
 
-3. Update the GitHub repository locations to your forked version of the code
+3. In ``ngm-reporthub.shell.build.sh``, update the GitHub repository locations to your forked version of the code
 
 		# UPDATE TO YOUR FORKED REPO! (lines 146 & 168)
 		sudo git clone https://github.com/<your.fork>/ngm-reportHub.git
 
-5. Run [Vagrant Up](https://www.vagrantup.com/docs/cli/up.html) command
+4. Run [Vagrant Up](https://www.vagrantup.com/docs/cli/up.html) command
 
 		$ vagrant up
 
