@@ -41,13 +41,13 @@ Review links on how to contribute code to ReportHub repositories
 
 ### Result
 - The ``ngm`` folder will now contain the following structure
-|-- ngm
-|---- csv
-|---- data
-|---- kobo
-|---- ngm-reportShell
-|---- mongo
-|---- scripts
+├── ngm
+│   ├── css
+│   ├── data
+│   ├── kobo
+│   ├── ngm-reportShell
+│   ├── mongo
+│   ├── scripts
 	
 
 # Vagrant Local Server
