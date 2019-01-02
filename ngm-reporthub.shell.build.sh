@@ -84,9 +84,9 @@ sudo npm install -g n
 sudo n 8.10.0
 cd /home/ubuntu/nginx/www/ngm-reportEngine
 sudo npm install sails-postgresql@0.11.4
-cd /home/ubuntu/nginx/www/ngm-reportHub
 sudo npm install async@2.6.1
-sudo npm install gulp-uglify-es
+cd /home/ubuntu/nginx/www/ngm-reportHub
+sudo npm install gulp-uglify-es --save-dev
 
 
 ####################################################### Python 
