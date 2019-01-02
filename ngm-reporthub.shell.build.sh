@@ -8,7 +8,7 @@
 # #  - node v0.12.9
 # #  - npm v3.4.0
 # #  - pm2 v0.15.10
-# #  - sailsjs v0.11.2
+# #  - sailsjs v0.11.4
 # #  - sails-postgresql
 # #  - bower v1.6.5
 # #  - grunt v0.4.x
@@ -65,6 +65,15 @@ echo "------------ npm grunt ------------"
 sudo npm install -g grunt@0.4.5
 sudo npm install -g grunt-cli@0.1.13
 
+
+######################################################## NPM UPDATES
+sudo npm install -g n
+sudo n 8.10.0
+cd /home/ubuntu/nginx/www/ngm-reportEngine
+sudo npm install sails-postgresql@0.11.4
+cd /home/ubuntu/nginx/www/ngm-reportHub
+sudo npm install async@2.6.1
+sudo npm install gulp-uglify-es
 
 
 ####################################################### Python 
