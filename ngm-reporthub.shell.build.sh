@@ -7,7 +7,7 @@
 # #  - git v1.9.1
 # #  - node v0.12.9
 # #  - npm v3.4.0
-# #  - pm2 v0.15.10
+# #  - pm2 v2.2.3
 # #  - sailsjs v0.11.4
 # #  - sails-postgresql
 # #  - bower v1.6.5
@@ -87,6 +87,8 @@ sudo npm install sails-postgresql@0.11.4
 sudo npm install async@2.6.1
 cd /home/ubuntu/nginx/www/ngm-reportHub
 sudo npm install gulp-uglify-es --save-dev
+sudo npm install -g pm2@2.2.3 --allow-root
+sudo pm2 update
 
 
 ####################################################### Python 
