@@ -85,8 +85,9 @@ sudo n 8.10.0
 cd /home/ubuntu/nginx/www/ngm-reportEngine
 sudo npm install sails-postgresql@0.11.4
 sudo npm install async@2.6.1
+sudo npm install --save bcrypt-nodejs
 cd /home/ubuntu/nginx/www/ngm-reportHub
-sudo npm install gulp-uglify-es --save-dev
+sudo npm install gulp-uglify-es --save-dev 
 sudo npm install -g pm2@2.2.3 --allow-root
 sudo pm2 update
 
