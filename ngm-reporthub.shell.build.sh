@@ -388,6 +388,7 @@ mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --f
 mongo
 use ngmHealthCluster
 db.getCollection('activities').find({activity_type_id:'hardware_materials_distribution'}).forEach(function (d) { if( d.kit_details.length ) { d.kit_details = JSON.parse(d.kit_details); db.getCollection('activities').save(d); } });
+db.getCollection('activities').find({}).forEach(function (d) { if( d.unit_type_id.length ) { d.unit_type_id = JSON.parse(d.unit_type_id); db.getCollection('activities').save(d); } });
 exit
 # mongoimport -d ngmHealthCluster -c donors --drop --headerline --type csv --file /home/ubuntu/data/csv/donors.csv
 # mongoimport -d ngmHealthCluster -c stockitems --drop --headerline --type csv --file /home/ubuntu/data/csv/stockitems.csv
