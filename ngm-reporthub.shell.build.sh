@@ -169,7 +169,7 @@ sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
 
 
 # build HUB app BOWER and NODE
-cd /home/ubuntu/nginx/www/ngm-reportHub
+# cd /home/ubuntu/nginx/www/ngm-reportHub
 
 ## ONLINE
 ## node_modules
@@ -183,13 +183,14 @@ cd /home/ubuntu/nginx/www/ngm-reportHub
 # sudo rm bower_components.zip\?dl\=1
 
 ## LOCAL
+cd /home/ubuntu/
 # node_modules
-sudo cp ../data/config/reportHub/node_modules.zip /home/ubuntu/nginx/www/ngm-reportHub
+sudo cp /home/ubuntu/data/config/reportHub/node_modules.zip /home/ubuntu/nginx/www/ngm-reportHub
 unzip node_modules.zip
 sudo rm node_modules.zip
 
 # bower_components
-sudo cp ../data/config/reportHub/bower_components.zip /home/ubuntu/nginx/www/ngm-reportHub
+sudo cp /home/ubuntu/data/config/reportHub/bower_components.zip /home/ubuntu/nginx/www/ngm-reportHub
 unzip bower_components.zip
 sudo rm bower_components.zip
 
@@ -202,7 +203,7 @@ sudo rm bower_components.zip
 # sudo git clone https://github.com/<your.fork>/ngm-reportEngine.git
 
 ## build ENGINE app NODE
-cd /home/ubuntu/nginx/www/ngm-reportEngine
+# cd /home/ubuntu/nginx/www/ngm-reportEngine
 
 ## ONLINE
 # wget https://www.dropbox.com/s/ie8l41wgvwe0xke/node_modules.zip?dl=1
@@ -211,7 +212,7 @@ cd /home/ubuntu/nginx/www/ngm-reportEngine
 
 ## LOCAL
 # node_modules
-sudo cp ../data/config/reportEngine/node_modules.zip /home/ubuntu/nginx/www/ngm-reportEngine
+sudo cp /home/ubuntu/data/config/reportEngine/node_modules.zip /home/ubuntu/nginx/www/ngm-reportEngine
 unzip node_modules.zip
 sudo rm node_modules.zip
 
