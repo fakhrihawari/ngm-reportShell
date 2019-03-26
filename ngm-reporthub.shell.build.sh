@@ -150,21 +150,34 @@ sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
 
 ####################################################### ngm-ReportHub
 
-# build ReportHub BOWER and NODE
-cd /home/ubuntu/nginx/www
-
 ## UPDATE TO YOUR FORKED REPO!
 ## https://help.github.com/articles/changing-a-remote-s-url/
 # sudo git clone https://github.com/<your.fork>/ngm-reportHub.git
 
+
+# build HUB app BOWER and NODE
+# cd /home/ubuntu/nginx/www/ngm-reportHub
+
+## ONLINE
+## node_modules
+# wget https://www.dropbox.com/s/ie8l41wgvwe0xke/node_modules.zip?dl=1
+# unzip node_modules.zip?dl=1
+# sudo rm node_modules.zip\?dl\=1
+
+## bower_components
+# wget https://www.dropbox.com/s/5obb3lqo9el8my2/bower_components.zip?dl=1
+# unzip bower_components.zip?dl=1
+# sudo rm bower_components.zip\?dl\=1
+
 ## LOCAL
+cd /home/ubuntu/
 # node_modules
-sudo cp ../data/config/reportHub/node_modules.zip /home/ubuntu/nginx/www/ngm-reportHub
+sudo cp /home/ubuntu/data/config/reportHub/node_modules.zip /home/ubuntu/nginx/www/ngm-reportHub
 unzip node_modules.zip
 sudo rm node_modules.zip
 
 # bower_components
-sudo cp ../data/config/reportHub/bower_components.zip /home/ubuntu/nginx/www/ngm-reportHub
+sudo cp /home/ubuntu/data/config/reportHub/bower_components.zip /home/ubuntu/nginx/www/ngm-reportHub
 unzip bower_components.zip
 sudo rm bower_components.zip
 
@@ -173,17 +186,15 @@ sudo rm bower_components.zip
 ####################################################### ngm-ReportEngine
 
 ## build ReportHub Engine app NODE
-cd /home/ubuntu/nginx/www
+# cd /home/ubuntu/nginx/www
 
 ## UPDATE TO YOUR FORKED REPO!
 ## https://help.github.com/articles/changing-a-remote-s-url/
 # sudo git clone https://github.com/<your.fork>/ngm-reportEngine.git
 
-sudo git clone https://github.com/pfitzpaddy/ngm-reportEngine.git
-
 ## LOCAL
 # node_modules
-sudo cp ../data/config/reportEngine/node_modules.zip /home/ubuntu/nginx/www/ngm-reportEngine
+sudo cp /home/ubuntu/data/config/reportEngine/node_modules.zip /home/ubuntu/nginx/www/ngm-reportEngine
 unzip node_modules.zip
 sudo rm node_modules.zip
 
@@ -396,5 +407,5 @@ exit
 
 
 ## start the ENGINE
-# cd /home/ubuntu/nginx/www/ngm-reportEngine
-# sudo sails lift
+cd /home/ubuntu/nginx/www/ngm-reportEngine
+sudo sails lift
