@@ -185,19 +185,23 @@ sudo rm bower_components.zip
 
 ####################################################### ngm-ReportEngine
 
-## build ReportHub Engine app NODE
-# cd /home/ubuntu/nginx/www
-
 ## UPDATE TO YOUR FORKED REPO!
 ## https://help.github.com/articles/changing-a-remote-s-url/
 # sudo git clone https://github.com/<your.fork>/ngm-reportEngine.git
+
+## build ENGINE app NODE
+# cd /home/ubuntu/nginx/www/ngm-reportEngine
+
+## ONLINE
+# wget https://www.dropbox.com/s/ie8l41wgvwe0xke/node_modules.zip?dl=1
+# unzip node_modules.zip?dl=1
+# sudo rm node_modules.zip\?dl\=1
 
 ## LOCAL
 # node_modules
 sudo cp /home/ubuntu/data/config/reportEngine/node_modules.zip /home/ubuntu/nginx/www/ngm-reportEngine
 unzip node_modules.zip
 sudo rm node_modules.zip
-
 
 
 
