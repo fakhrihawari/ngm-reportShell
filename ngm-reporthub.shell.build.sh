@@ -43,6 +43,19 @@ echo "------------ Install Git ------------"
 sudo apt-get install -y git
 
 
+####################################################### UPDATE NODE
+# sudo npm cache clean -f
+# sudo npm install -g n
+# sudo n stable
+
+######################################################## NPM FIX PERMISSIONS
+# echo "------------ Make npm directory ------------" 
+# mkdir ~/.npm
+# sudo chown -R $USER:$GROUP ~/.npm
+# mkdir ~/.node-gyp
+# sudo chown -R $USER:$GROUP ~/.node-gyp
+
+
 
 ######################################################## NPM INSTALLS
 echo "------------ npm install npm ------------" 
@@ -156,7 +169,7 @@ sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
 
 
 # build HUB app BOWER and NODE
-# cd /home/ubuntu/nginx/www/ngm-reportHub
+cd /home/ubuntu/nginx/www/ngm-reportHub
 
 ## ONLINE
 ## node_modules
@@ -170,7 +183,7 @@ sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
 # sudo rm bower_components.zip\?dl\=1
 
 ## LOCAL
-cd /home/ubuntu/
+
 # node_modules
 sudo cp /home/ubuntu/data/config/reportHub/node_modules.zip /home/ubuntu/nginx/www/ngm-reportHub
 unzip node_modules.zip
@@ -190,7 +203,7 @@ sudo rm bower_components.zip
 # sudo git clone https://github.com/<your.fork>/ngm-reportEngine.git
 
 ## build ENGINE app NODE
-# cd /home/ubuntu/nginx/www/ngm-reportEngine
+cd /home/ubuntu/nginx/www/ngm-reportEngine
 
 ## ONLINE
 # wget https://www.dropbox.com/s/ie8l41wgvwe0xke/node_modules.zip?dl=1
@@ -202,27 +215,6 @@ sudo rm bower_components.zip
 sudo cp /home/ubuntu/data/config/reportEngine/node_modules.zip /home/ubuntu/nginx/www/ngm-reportEngine
 unzip node_modules.zip
 sudo rm node_modules.zip
-
-
-
-####### NOTE: EMAIL NOTIFICAITONS REQUIRE email.js CONFIGURATION
-# Refer to https://github.com/balderdashy/sails-hook-email/#configuration
-# /home/ubuntu/nginx/www/ngm-reportEngine/config/email.js
-
-
-
-
-####### NOTE: KOBO REQUIRE kobo.js CONFIGURATION
-echo -e "
-module.exports.kobo = {
-	NUTRITION_KOBO_URL:'',
-	NUTRITION_KOBO_PK: ,
-	NUTRITION_KOBO_USER:'',
-	NUTRITION_KOBO_PASSWORD:''
-};" | sudo tee /home/ubuntu/nginx/www/ngm-reportEngine/config/kobo.js
-
-
-
 
 
 # connection config sails li
@@ -277,6 +269,24 @@ module.exports = {
 			// user: 'username',
 			// password: 'password',
 			database: 'ngmAfNutrition',
+			schema: false
+		},
+		ngmIRSServer: {
+			adapter: 'sails-mongo',
+			host: 'localhost',
+			port: 27017,
+			// user: 'username',
+			// password: 'password',
+			database: 'ngmIRS',
+			schema: false
+		},
+		ngmiMMAPServer: {
+			adapter: 'sails-mongo',
+			host: 'localhost',
+			port: 27017,
+			// user: 'username',
+			// password: 'password',
+			database: 'ngmiMMAP',
 			schema: false
 		},
 		ngmPostgreServer: {
@@ -386,28 +396,46 @@ sudo gunzip -c /home/ubuntu/data/postgres/immap_afg.gz | psql -U ngmadmin -h loc
 
 
 # restore mongodb scripts
-mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
+mongorestore --drop -d ngmiMMAP /home/ubuntu/data/mongo/ngmiMMAP
 mongorestore --drop -d ngmReportHub /home/ubuntu/data/mongo/ngmReportHub
+mongorestore --drop -d ngmIRS /home/ubuntu/data/mongo/ngmIRS
 mongorestore --drop -d ngmHealthCluster /home/ubuntu/data/mongo/ngmHealthCluster
 mongorestore --drop -d ngmEthCtc /home/ubuntu/data/mongo/ngmEthCtc
+mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
+mongorestore --drop -d ngmAfNutrition /home/ubuntu/data/mongo/ngmAfNutrition
 
 
 # # import collection
-mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --file /home/ubuntu/data/csv/activities.csv
-mongo
-use ngmHealthCluster
-db.getCollection('activities').find({}).forEach(function (d) { if( d.kit_details.length ) { d.kit_details = JSON.parse(d.kit_details); db.getCollection('activities').save(d); } });
-db.getCollection('activities').find({}).forEach(function (d) { if( d.unit_type_id.length ) { d.unit_type_id = JSON.parse(d.unit_type_id); db.getCollection('activities').save(d); } });
-db.getCollection('activities').find({}).forEach(function (d) { if( d.mpc_delivery_type_id.length ) { d.mpc_delivery_type_id = JSON.parse(d.mpc_delivery_type_id); db.getCollection('activities').save(d); } });
-exit
+# mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --file /home/ubuntu/data/csv/activities.csv
+# mongo
+# use ngmHealthCluster
+# db.getCollection('activities').find({}).forEach(function (d) { if( d.kit_details.length ) { d.kit_details = JSON.parse(d.kit_details); db.getCollection('activities').save(d); } });
+# db.getCollection('activities').find({}).forEach(function (d) { if( d.unit_type_id.length ) { d.unit_type_id = JSON.parse(d.unit_type_id); db.getCollection('activities').save(d); } });
+# db.getCollection('activities').find({}).forEach(function (d) { if( d.mpc_delivery_type_id.length ) { d.mpc_delivery_type_id = JSON.parse(d.mpc_delivery_type_id); db.getCollection('activities').save(d); } });
+# exit
 # mongoimport -d ngmHealthCluster -c donors --drop --headerline --type csv --file /home/ubuntu/data/csv/donors.csv
 # mongoimport -d ngmHealthCluster -c stockitems --drop --headerline --type csv --file /home/ubuntu/data/csv/stockitems.csv
 # mongoimport -d ngmReportHub -c organizations --drop --headerline --type csv --file /home/ubuntu/data/csv/organizations.csv
 
+# # import admins
+# mongoimport -d ngmReportHub -c admin1 --type json --file /home/ubuntu/data/json/sy_admin_1.json --jsonArray
+# mongoimport -d ngmReportHub -c admin2 --type json --file /home/ubuntu/data/json/sy_admin_2.json --jsonArray
+# mongoimport -d ngmReportHub -c admin3 --type json --file /home/ubuntu/data/json/sy_admin_3.json --jsonArray
+
+# # # ethiopian health facilities
+# # mongoimport -d ngmReportHub -c admin3facilities --drop --file /home/ubuntu/data/json/admin3facilities.json
 
 # # # export CSV
 # # mongoimport -d ngmHealthCluster -c reporthub_indicators_hct --drop --jsonArray --file /home/ubuntu/data/json/reporthub_indicators_hct.json
 # mongoexport --db ngmReportHub  --collection user   -q "{ 'admin0pcode': 'ET' }" --type=csv --fields id,admin0pcode,cluster,organization,username,name,position,phone,email,skype,visits,createdAt,updatedAt --out /home/ubuntu/data/csv/cdc/et_users.csv
+
+# # trainings
+# mongoexport --db ngmHealthCluster  --collection trainingparticipants  --type=csv --fields adminRpcode,adminRname,admin0pcode,admin0name,organization_id,organization_tag,organization,implementing_partners,cluster_id,cluster,name,position,phone,email,username,project_id,project_acbar_partner,project_hrp_code,project_code,project_status,project_title,project_description,project_start_date,project_end_date,project_budget,project_budget_currency,mpc_purpose,mpc_purpose_cluster_id,inter_cluster_activities,project_donor,strategic_objectives,report_id,report_active,report_status,report_month,report_year,report_submitted,reporting_period,reporting_due_date,training_id,training_title,training_topics,training_start_date,training_end_date,training_days_number,training_conducted_by,training_supported_by,trainee_affiliation_id,trainee_affiliation_name,trainee_health_worker_id,trainee_health_worker_name,trainee_men,trainee_women,location_id,admin1pcode,admin1name,admin2pcode,admin2name,admin3pcode,admin3name,facility_id,facility_class,facility_status,facility_implementation_id,facility_implementation_name,facility_type_id,facility_type_name,facility_name,facility_hub_id,facility_hub_name,conflict,admin1lng,admin1lat,admin2lng,admin2lat,admin3lat,facility_lng,facility_lat --out /home/ubuntu/data/csv/trainings/trainingparticipants.csv
+
+# mongoexport --db ngmReportHub  --collection admin1 -q '{ admin0pcode: "ET" }' --type=csv --fields admin1pcode,admin1name --out /home/ubuntu/data/csv/ethiopia/admin1Et.csv
+# mongoexport --db ngmReportHub  --collection admin2 -q '{ admin0pcode: "ET" }' --type=csv --fields admin2pcode,admin2name,admin1pcode --out /home/ubuntu/data/csv/ethiopia/admin2Et.csv
+# mongoexport --db ngmReportHub  --collection admin3 -q '{ admin0pcode: "ET" }' --type=csv --fields admin3pcode,admin3name,admin1pcode,admin2pcode, --out /home/ubuntu/data/csv/ethiopia/admin3Et.csv
+# mongoexport --db ngmReportHub  --collection admin3facilities -q '{ admin0pcode: "ET" }' --type=csv --fields admin1pcode,admin1name,admin2pcode,admin2name,admin3pcode,admin3name,facility_id,facility_type,facility_name --out /home/ubuntu/data/csv/ethiopia/facilitiesEt.csv
 
 
 ## start the ENGINE
