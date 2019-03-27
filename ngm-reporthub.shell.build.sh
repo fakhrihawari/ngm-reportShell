@@ -169,7 +169,7 @@ sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
 
 
 # build HUB app BOWER and NODE
-# cd /home/ubuntu/nginx/www/ngm-reportHub
+cd /home/ubuntu/nginx/www/ngm-reportHub
 
 ## ONLINE
 ## node_modules
@@ -183,7 +183,7 @@ sudo git clone https://github.com/pfitzpaddy/ngm-reportPrint.git
 # sudo rm bower_components.zip\?dl\=1
 
 ## LOCAL
-cd /home/ubuntu/
+
 # node_modules
 sudo cp /home/ubuntu/data/config/reportHub/node_modules.zip /home/ubuntu/nginx/www/ngm-reportHub
 unzip node_modules.zip
@@ -203,7 +203,7 @@ sudo rm bower_components.zip
 # sudo git clone https://github.com/<your.fork>/ngm-reportEngine.git
 
 ## build ENGINE app NODE
-# cd /home/ubuntu/nginx/www/ngm-reportEngine
+cd /home/ubuntu/nginx/www/ngm-reportEngine
 
 ## ONLINE
 # wget https://www.dropbox.com/s/ie8l41wgvwe0xke/node_modules.zip?dl=1
@@ -269,6 +269,24 @@ module.exports = {
 			// user: 'username',
 			// password: 'password',
 			database: 'ngmAfNutrition',
+			schema: false
+		},
+		ngmIRSServer: {
+			adapter: 'sails-mongo',
+			host: 'localhost',
+			port: 27017,
+			// user: 'username',
+			// password: 'password',
+			database: 'ngmIRS',
+			schema: false
+		},
+		ngmiMMAPServer: {
+			adapter: 'sails-mongo',
+			host: 'localhost',
+			port: 27017,
+			// user: 'username',
+			// password: 'password',
+			database: 'ngmiMMAP',
 			schema: false
 		},
 		ngmPostgreServer: {
@@ -378,20 +396,23 @@ sudo gunzip -c /home/ubuntu/data/postgres/immap_afg.gz | psql -U ngmadmin -h loc
 
 
 # restore mongodb scripts
-mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
+mongorestore --drop -d ngmiMMAP /home/ubuntu/data/mongo/ngmiMMAP
 mongorestore --drop -d ngmReportHub /home/ubuntu/data/mongo/ngmReportHub
+mongorestore --drop -d ngmIRS /home/ubuntu/data/mongo/ngmIRS
 mongorestore --drop -d ngmHealthCluster /home/ubuntu/data/mongo/ngmHealthCluster
 mongorestore --drop -d ngmEthCtc /home/ubuntu/data/mongo/ngmEthCtc
+mongorestore --drop -d ngmEpr /home/ubuntu/data/mongo/ngmEpr
+mongorestore --drop -d ngmAfNutrition /home/ubuntu/data/mongo/ngmAfNutrition
 
 
 # # import collection
-mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --file /home/ubuntu/data/csv/activities.csv
-mongo
-use ngmHealthCluster
-db.getCollection('activities').find({}).forEach(function (d) { if( d.kit_details.length ) { d.kit_details = JSON.parse(d.kit_details); db.getCollection('activities').save(d); } });
-db.getCollection('activities').find({}).forEach(function (d) { if( d.unit_type_id.length ) { d.unit_type_id = JSON.parse(d.unit_type_id); db.getCollection('activities').save(d); } });
-db.getCollection('activities').find({}).forEach(function (d) { if( d.mpc_delivery_type_id.length ) { d.mpc_delivery_type_id = JSON.parse(d.mpc_delivery_type_id); db.getCollection('activities').save(d); } });
-exit
+# mongoimport -d ngmHealthCluster -c activities --drop --headerline --type csv --file /home/ubuntu/data/csv/activities.csv
+# mongo
+# use ngmHealthCluster
+# db.getCollection('activities').find({}).forEach(function (d) { if( d.kit_details.length ) { d.kit_details = JSON.parse(d.kit_details); db.getCollection('activities').save(d); } });
+# db.getCollection('activities').find({}).forEach(function (d) { if( d.unit_type_id.length ) { d.unit_type_id = JSON.parse(d.unit_type_id); db.getCollection('activities').save(d); } });
+# db.getCollection('activities').find({}).forEach(function (d) { if( d.mpc_delivery_type_id.length ) { d.mpc_delivery_type_id = JSON.parse(d.mpc_delivery_type_id); db.getCollection('activities').save(d); } });
+# exit
 # mongoimport -d ngmHealthCluster -c donors --drop --headerline --type csv --file /home/ubuntu/data/csv/donors.csv
 # mongoimport -d ngmHealthCluster -c stockitems --drop --headerline --type csv --file /home/ubuntu/data/csv/stockitems.csv
 # mongoimport -d ngmReportHub -c organizations --drop --headerline --type csv --file /home/ubuntu/data/csv/organizations.csv
@@ -420,6 +441,3 @@ exit
 ## start the ENGINE
 cd /home/ubuntu/nginx/www/ngm-reportEngine
 sudo sails lift
-
-
-
