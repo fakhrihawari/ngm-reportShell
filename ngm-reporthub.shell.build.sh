@@ -23,6 +23,7 @@
 
 # refresh cache
 echo "------------ Update repos ------------" 
+sudo apt-key update
 sudo apt-get update
 # build essential
 echo "------------ Build essential ------------" 
@@ -36,7 +37,7 @@ echo "------------ Get NodeJS 0.12 ------------"
 # v0.12.15
 curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash
 echo "------------ Install NodeJS ------------" 
-sudo apt-get install -y nodejs
+sudo apt-get install -y --force-yes nodejs
 echo "------------ Install Nginx ------------" 
 sudo apt-get install -y nginx
 echo "------------ Install Git ------------" 
@@ -125,7 +126,7 @@ sudo -u postgres psql -c "CREATE DATABASE immap_afg WITH OWNER ngmadmin;"
 sudo -u postgres psql -d immap_afg -c "CREATE EXTENSION postgis;"
 
 # add pgpass for command line access
-echo -e "192.168.33.16:5432:immap_afg:ngmadmin:ngmadmin" | sudo tee ~/.pgpass
+echo -e "192.168.33.16:5432:immap_afg:ngmadmin:ngmadmin\nlocalhost:5432:immap_afg:ngmadmin:ngmadmin" | sudo tee ~/.pgpass
 sudo chmod 0600 ~/.pgpass
 
 # udpate listen_addresses
@@ -142,7 +143,7 @@ echo "------------ Install MongoDB ------------"
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 sudo apt-get update
-sudo apt-get install -y mongodb-org
+sudo apt-get install -y --force-yes mongodb-org
 
 # LISTEN TO
 sudo sed -i 's@bindIp: 127.0.0.1@#bindIp: 127.0.0.1@g' /etc/mongod.conf
@@ -186,12 +187,12 @@ cd /home/ubuntu/nginx/www/ngm-reportHub
 
 # node_modules
 sudo cp /home/ubuntu/data/config/reportHub/node_modules.zip /home/ubuntu/nginx/www/ngm-reportHub
-unzip node_modules.zip
+unzip -o node_modules.zip
 sudo rm node_modules.zip
 
 # bower_components
 sudo cp /home/ubuntu/data/config/reportHub/bower_components.zip /home/ubuntu/nginx/www/ngm-reportHub
-unzip bower_components.zip
+unzip -o bower_components.zip
 sudo rm bower_components.zip
 
 
@@ -213,9 +214,11 @@ cd /home/ubuntu/nginx/www/ngm-reportEngine
 ## LOCAL
 # node_modules
 sudo cp /home/ubuntu/data/config/reportEngine/node_modules.zip /home/ubuntu/nginx/www/ngm-reportEngine
-unzip node_modules.zip
+unzip -o node_modules.zip
 sudo rm node_modules.zip
 
+npm install xlsx@0.15.1
+npm install exceljs@3.8.1
 
 # connection config sails li
 echo -e "/**
@@ -296,7 +299,35 @@ module.exports = {
 			user: 'ngmadmin',
 			password: 'ngmadmin',
 			database: 'immap_afg'
-		}
+		},
+        ngmWfpGfaServer: {
+            adapter: 'sails-mongo',
+            host: 'localhost',
+            port: 27017,
+            // user: 'username',
+            // password: 'password',
+            database: 'ngmWfpGfa',
+            schema: false
+        },
+        ngmWfpLivelihoodsServer: {
+            adapter: 'sails-mongo',
+            host: 'localhost',
+            port: 27017,
+            // user: 'username',
+            // password: 'password',
+            database: 'ngmWfpLivelihoods',
+            schema: false
+        },
+        ngmCustomReportsServer: {
+            adapter: 'sails-mongo',
+            host: 'localhost',
+            port: 27017,
+            // user: 'username',
+            // password: 'password',
+            database: 'ngmCustomReports',
+            schema: true,
+            poolSize: 20
+        },
 	}
 }" | sudo tee /home/ubuntu/nginx/www/ngm-reportEngine/config/local.js
 
@@ -347,8 +378,8 @@ server {
 \tlocation /desk/bower_components {
 \t\talias /home/ubuntu/nginx/www/ngm-reportHub/bower_components/;
 \t}
-\tlocation /desk/bower_components/ {
-\t\talias /home/ubuntu/nginx/www/ngm-reportHub/bower_components/;
+\tlocation /desk/node_modules/ {
+\t\talias /home/ubuntu/nginx/www/ngm-reportHub/node_modules/;
 \t}
 
 \tlocation /scripts/ {
