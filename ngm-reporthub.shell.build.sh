@@ -198,7 +198,7 @@ sudo rm bower_components.zip
 
 
 ####################################################### ngm-ReportEngine
-
+cd /home/ubuntu/nginx/www
 ## UPDATE TO YOUR FORKED REPO!
 ## https://help.github.com/articles/changing-a-remote-s-url/
 # sudo git clone https://github.com/<your.fork>/ngm-reportEngine.git
